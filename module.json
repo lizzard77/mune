@@ -1,0 +1,31 @@
+{
+    "name": "mune",
+    "title": "MUNE",
+    "description": "A toolkit for playing solo.",
+    "version": "0.1.0",
+    "minimumCoreVersion": "0.8.5",
+    "compatibleCoreVersion": "0.8.6",
+    "author": "Furyspark",
+    "esmodules": [
+        "mune.js"
+    ],
+    "styles": [
+        "mune.css"
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "packs": [
+        {
+            "name": "mune",
+            "label": "MUNE",
+            "systems": ["mune"],
+            "path": "./packs/mune.db",
+            "entity": "RollTable"
+        }
+    ]
+}

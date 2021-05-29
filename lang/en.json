@@ -1,0 +1,48 @@
+{
+    "MUNE": {
+        "KeepHighest": "Keep Highest",
+        "KeepLowest": "Keep Lowest",
+        "Reason": "Reason",
+        "Roll": "Roll",
+        "Oracle": {
+            "Name": "Oracle",
+            "1": "No, and...",
+            "2": "No",
+            "3": "No, but...",
+            "4": "Yes, but...",
+            "5": "Yes",
+            "6": "Yes, and..."
+        },
+        "Intervention": {
+            "Name": "Intervention",
+            "1": "New entity",
+            "2": "Entity positive",
+            "3": "Entity negative",
+            "4": "Advance plot",
+            "5": "Regress plot",
+            "6": "Wild"
+        },
+        "Portent": {
+            "Name": "Portent"
+        },
+        "NPCInteraction": {
+            "Name": "NPC Interaction",
+            "1": "Hostile",
+            "2": "Neutral",
+            "3": "Friendly"
+        },
+        "TWENE": {
+            "Name": "TWENE",
+            "1": "Increase simple element",
+            "2": "Decrease simple elemnet",
+            "3": "Add simple element",
+            "4": "Remove simple element",
+            "5": "Increase major element",
+            "6": "Decrease major element",
+            "7": "Add major element",
+            "8": "Remove major element",
+            "9": "Wild positive",
+            "10": "Wild negative"
+        }
+    }
+}
