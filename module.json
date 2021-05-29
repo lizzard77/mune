@@ -27,5 +27,7 @@
             "path": "./packs/mune.db",
             "entity": "RollTable"
         }
-    ]
+    ],
+    "manifest": "https://gitlab.com/Furyspark/foundryvtt-mune/-/raw/master/module.json",
+    "download": "https://gitlab.com/Furyspark/foundryvtt-mune/-/archive/0.1.0/foundryvtt-mune-0.1.0.zip"
 }
