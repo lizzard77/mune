@@ -7,6 +7,6 @@
         <a class="inline-roll inline-result" data-roll="{{roll.json}}">
             <i class="fas fa-dice-d20"></i> {{roll.total}}
         </a>
-        <span class="result">{{result}}{{#if resultSuffix}} {{resultSuffix}}{{/if}}</span>
+        <span class="result">{{result}}</span>{{#if resultSuffix}}<span class="suffix"> ({{resultSuffix}})</span>{{/if}}
     </p>
 </div>
