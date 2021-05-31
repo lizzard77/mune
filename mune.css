@@ -10,6 +10,10 @@
 #mune .rolls button {
   width: 128px;
 }
+.chat-message .mune .flavor {
+  font-style: italic;
+  color: #333;
+}
 .chat-message .mune .tag {
   display: inline-block;
   margin: 0 2px 1px 0;
@@ -18,7 +22,7 @@
   border-radius: 3px;
   background: rgba(0, 0, 0, 0.05);
 }
-.chat-message .mune .flavor {
-  font-style: italic;
-  color: #333;
+.chat-message .mune.mune-action .content .result {
+  margin-left: 4px;
+  font-weight: bold;
 }

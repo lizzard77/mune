@@ -39,7 +39,7 @@ export const portent = async function(options = {}) {
     const content = await renderTemplate("modules/mune/templates/chat/portent.hbs", {
         words: words,
     });
-    
+
     return ChatMessage.create({
         user: game.user.id,
         content,
@@ -58,9 +58,14 @@ const generateActionResult = async function(name, sides = 6, options = {}) {
 
     const content = await renderTemplate("modules/mune/templates/chat/action.hbs", {
         title: game.i18n.localize(`MUNE.${name}.Name`),
+        actionType: name.toLowerCase(),
         result: label,
         flavor: options.flavor,
         resultSuffix: keepLabel,
+        roll: {
+            json: escape(JSON.stringify(roll)),
+            total: roll.total,
+        },
     });
 
     return ChatMessage.create({

@@ -1,7 +1,12 @@
-<div class="mune">
+<div class="mune mune-action mune-{{actionType}}">
     <h2>{{title}}</h2>
     
     {{#if flavor}}<p><span class="flavor">{{flavor}}</span></p>{{/if}}
 
-    <p><span class="content">{{result}}{{#if resultSuffix}} {{resultSuffix}}{{/if}}</span></p>
+    <p class="content">
+        <a class="inline-roll inline-result" data-roll="{{roll.json}}">
+            <i class="fas fa-dice-d20"></i> {{roll.total}}
+        </a>
+        <span class="result">{{result}}{{#if resultSuffix}} {{resultSuffix}}{{/if}}</span>
+    </p>
 </div>
