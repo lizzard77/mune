@@ -15,6 +15,19 @@ export class MuneWindow extends Application {
         return result;
     }
 
+    getData() {
+        const data = mergeObject(super.getData(), {
+            info: {},
+        });
+
+        const muneData = game.settings.get("mune", "data");
+        data.info.interventionPoints = {
+            total: muneData.interventionPoints ?? 0,
+        };
+
+        return data;
+    }
+
     setPosition({left, top, width, height, scale} = {}) {
         const el = this.element[0];
         const currentPosition = this.position;
@@ -61,6 +74,21 @@ export class MuneWindow extends Application {
         html.find(".rolls button.portent").click(this._rollPortent.bind(this));
         html.find(".rolls button.npc-interaction").click((event) => { this._rollDialog(event, { name: game.i18n.localize("MUNE.NPCInteraction.Name"), fn: actions.npcInteraction }); });
         html.find(".rolls button.twene").click((event) => { this._rollDialog(event, { name: game.i18n.localize("MUNE.TWENE.Name"), fn: actions.twene }); });
+        
+        // Info editing
+        html.find(".intervention-controls a").click(this._interventionControls.bind(this));
+    }
+
+    _interventionControls(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+
+        if (a.classList.contains("add")) {
+            return actions.addInterventionPoints(1);
+        }
+        else if (a.classList.contains("subtract")) {
+            return actions.addInterventionPoints(-1);
+        }
     }
 
     _rollDialog(event, options) {

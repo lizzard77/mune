@@ -10,3 +10,10 @@
 #mune .rolls button {
   width: 128px;
 }
+#mune hr {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+#mune .info .intervention {
+  display: flex;
+  justify-content: space-between;
+}

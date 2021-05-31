@@ -48,6 +48,12 @@
             "HowManyWords": {
                 "Info": "How many words?"
             }
+        },
+        "InterventionPoints": {
+            "Name": {
+                "Noun": "Intervention Point",
+                "Plural": "Intervention Points"
+            }
         }
     }
 }

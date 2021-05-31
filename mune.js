@@ -1,9 +1,14 @@
 import { MuneWindow } from "./module/apps/mune-window.js";
 import { registerSettings } from "./module/settings.js";
+import * as actions from "./module/actions.js";
 
 Hooks.once("init", () => {
     game.mune = {
         window: null,
+        actions: Object.entries(actions).reduce((cur, o) => {
+            cur[o[0]] = o[1];
+            return cur;
+        }, {}),
     };
 
     registerSettings();

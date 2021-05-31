@@ -52,6 +52,20 @@ const generateActionResult = async function(name, sides = 6, options = {}) {
     else if (options.disadvantage) formula = `2d${sides}kl`;
     const roll = await new CONFIG.Dice.rolls[0](formula).evaluate({ async: true });
 
+    // For Oracle: add intervention points
+    if (name === "Oracle") {
+        let addPoints = 0;
+        for (let d of roll.dice[0].results) {
+            if (d.result === sides) {
+                addPoints++;
+            }
+        }
+
+        if (addPoints) {
+            addInterventionPoints(addPoints);
+        }
+    }
+
     let label = game.i18n.localize(`MUNE.${name}.${roll.total}`);
     const keepLabel = options.advantage ? game.i18n.localize("MUNE.KeepHighest") : options.disadvantage ? game.i18n.localize("MUNE.KeepLowest") : undefined;
 
@@ -71,4 +85,17 @@ const generateActionResult = async function(name, sides = 6, options = {}) {
         user: game.user.id,
         content,
     });
+};
+
+export const addInterventionPoints = async function(value = 1) {
+    const data = game.settings.get("mune", "data");
+    const prevValue = data.interventionPoints ?? 0;
+    const newValue = prevValue + value;
+    return setInterventionPoints(newValue);
+};
+
+export const setInterventionPoints = async function(value = 0) {
+    return game.settings.set("mune", "data", mergeObject(game.settings.get("mune", "data"), {
+        interventionPoints: Math.max(0, value),
+    }, { inplace: false }));
 };
