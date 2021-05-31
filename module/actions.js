@@ -36,11 +36,10 @@ export const portent = async function(options = {}) {
     }
 
     // Generate chat content
-    let wordsFormatted = words.map((w) => {
-        return `<span class="tag">${w}</span>`;
-    }).join("");
-    let content = `<div class="mune"><h2>${game.i18n.localize("MUNE.Portent.Name")}</h2><div>${wordsFormatted}</div></div>`;
-
+    const content = await renderTemplate("modules/mune/templates/chat/portent.hbs", {
+        words: words,
+    });
+    
     return ChatMessage.create({
         user: game.user.id,
         content,
@@ -56,11 +55,16 @@ const generateActionResult = async function(name, sides = 6, options = {}) {
     let label = game.i18n.localize(`MUNE.${name}.${roll.total}`);
     const keepLabel = options.advantage ? game.i18n.localize("MUNE.KeepHighest") : options.disadvantage ? game.i18n.localize("MUNE.KeepLowest") : undefined;
     if (keepLabel) label = `${label} (${keepLabel})`;
-    let content = `<h2>${game.i18n.localize(`MUNE.${name}.Name`)}</h2><b>${label}</b>`;
+
+    const content = await renderTemplate("modules/mune/templates/chat/action.hbs", {
+        title: game.i18n.localize(`MUNE.${name}.Name`),
+        result: label,
+        flavor: options.flavor,
+        resultSuffix: keepLabel,
+    });
 
     return ChatMessage.create({
         user: game.user.id,
-        flavor: options.flavor,
         content,
     });
 };

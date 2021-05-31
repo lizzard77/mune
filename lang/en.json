@@ -43,6 +43,11 @@
             "8": "Remove major element",
             "9": "Wild positive",
             "10": "Wild negative"
+        },
+        "Dialog": {
+            "HowManyWords": {
+                "Info": "How many words?"
+            }
         }
     }
 }

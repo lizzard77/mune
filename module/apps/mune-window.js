@@ -109,7 +109,43 @@ export class MuneWindow extends Application {
     _rollPortent(event) {
         event.preventDefault();
 
-        return actions.portent();
+        new Dialog({
+            title: game.i18n.localize(`MUNE: ${game.i18n.localize("MUNE.Portent.Name")}`),
+            content: `<p>${game.i18n.localize("MUNE.Dialog.HowManyWords.Info")}</p>`,
+            buttons: {
+                "1": {
+                    label: "1",
+                    callback: (html) => {
+                        actions.portent({ wordCount: 1 });
+                    },
+                },
+                "2": {
+                    label: "2",
+                    callback: (html) => {
+                        actions.portent({ wordCount: 2 });
+                    },
+                },
+                "3": {
+                    label: "3",
+                    callback: (html) => {
+                        actions.portent({ wordCount: 3 });
+                    },
+                },
+                "4": {
+                    label: "4",
+                    callback: (html) => {
+                        actions.portent({ wordCount: 4 });
+                    },
+                },
+                "5": {
+                    label: "5",
+                    callback: (html) => {
+                        actions.portent({ wordCount: 5 });
+                    },
+                }
+            },
+            default: "2",
+        }).render(true);
     }
 
     _rollNPCInteraction(event) {
