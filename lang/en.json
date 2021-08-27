@@ -1,10 +1,15 @@
 {
     "MUNE": "MUNE",
     "mune": {
+        "Info": "Info",
         "KeepHighest": "Keep Highest",
         "KeepLowest": "Keep Lowest",
         "Reason": "Reason",
         "Roll": "Roll",
+        "Answer": "Answer",
+        "Type": "Type",
+        "Attitude": "Attitude",
+        "Result": "Result",
         "Settings": {
             "InterventionCost": {
                 "Name": "Intervention Cost",
@@ -13,6 +18,12 @@
         },
         "Oracle": {
             "Name": "Oracle",
+            "Help": {
+                "1": "When we start out a campaign in D&D, we have a couple of expectations even before any of the details have been divulged by the DM; we expect that our characters are going to start at level 1, and we expect that we're going to start in a tavern (is joke, sort of).",
+                "2": "Take a look at this table for a sec:",
+                "3": "This is the oracle. I can ask it questions as I would a DM. For example, I'm now going to ask if I start at the level 1. I roll a 5, so Yes.",
+                "4": "I also ask if I start off in a tavern; the result is \"No, but...\". I interpret this as most likely meaning that I at least start off in a populated area. I'd like to be sure, so I ask the oracle if that's the case; but this time the answer is Likely going to be yes."
+            },
             "1": "No, and...",
             "2": "No",
             "3": "No, but...",
@@ -22,6 +33,41 @@
         },
         "Intervention": {
             "Name": "Intervention",
+            "Help": {
+                "1": "Using the oracle system on its own is a perfectly viable way of playing solo, but there's so much more that can be added on top to provide a more fleshed out experience.",
+                "2": "One of the first things to address is DM initiative. No, not the grab-your-weapons-and-tussle type of initiative. While the oracle modifies our expectations to take us places we could never dream of, it can never truly surprise us because we're always the ones asking the questions. Interventions simulate those moments when a DM springs a trap on us, introduces a helpful NPC out of the blue, or adds another ogre to the already huge pile of enemies to defeat.",
+                "3": "Whenever a 6 is rolled on an oracle question (including secondary dice if the question is Likely/Unlikely), you gain an intervention point. Keep track of them on a piece of paper or dice.",
+                "4": "When you've gained 3 intervention points, an Intervention occurs. Reset the points to 0 and resolve the nature of the Intervention using the table below.",
+                "Types": {
+                    "1": {
+                        "1": "A new entity appears. Maybe this introduction is beneficial to you, maybe not. The specifics can be gleaned from asking the oracle, with some potential help from a Portent (see below).",
+                        "2": "Continuing to use our starting scenario, some examples of a new entity might see us encountering the head slaver, a potential buyer, or even a fellow slave with a plan to escape."
+                    },
+                    "2": {
+                        "1": "This is rather self explanatory. Something good or bad happens to an entity, the specifics of which can be determined by asking the oracle (with some optional help from a Portent).",
+                        "2": "Again using our starting scenario as an example, some entity positives might include:",
+                        "Positives": {
+                            "1": "Slavers: A top-paying slave owner is visiting town, looking to buy.",
+                            "2": "Town guard: The guardsman at the town gates threatens to report the slavers for excessive cruelty, unless he's payed a \"blind-eye\" fee.",
+                            "3": "Player character: You pass by a butcher's market stall, upon which lies an easily swipable carving knife."
+                        },
+                        "3": "Some entity negatives might include:",
+                        "Negatives": {
+                            "1": "Player character: The journey to the village has worn you out, giving you one level of exhaustion.",
+                            "2": "Player character: You are targeted by a whip attack from a slave driver.",
+                            "3": "Town guard: A slave attempts and fails to steal a weapon from a guard, causing a commotion."
+                        }
+                    },
+                    "4": {
+                        "1": "This is also pretty self explanatory. Advancing a plot pushes an unresolved hook in a certain direction. An example of advancing a plot using the staring scenario might see the player rescued by a group of freedom fighters, and a plot regression might involve the player character being sold to a high-ranking city official.",
+                        "2": "A plot advancement or regression should always help the the adventure progress, but it does so by either helping or hindering a certain goal or plot point."
+                    },
+                    "6": {
+                        "1": "This is to simulate the completely unexpected. It's a catch-em-all Intervention that can be good, bad, neutral, or downright crazy. This is the option that allows for sudden twists of fate, such as a dragon swooping down to attack the village and allowing the slaves to escape in the ensuing chaos.",
+                        "2": "Because a wild Intervention is so vague in what it can represent, you kinda have to use a Portent to figure out what the heck it actually means."
+                    }
+                }
+            },
             "1": "New entity",
             "2": "Entity positive",
             "3": "Entity negative",
@@ -30,16 +76,66 @@
             "6": "Wild"
         },
         "Portent": {
-            "Name": "Portent"
+            "Name": "Portent",
+            "Help": {
+                "1": "A portent is essentially inspiration. It's a two word (or more) sentence that acts as a springboard for the imagination. Maybe you've got no clue what a particular Intervention should be, or maybe you've exhausted your ideas for why an NPC pulled you aside for an urgent chat. That's the time to use a Portent.",
+                "2": "For an exmaple, in our starting scenario a wild Intervention would require a Portent to figure out. The words I receive are \"frail\" and \"jobbed\". This could mean a bunch of things, so I get the oracle to narrow things down for me.",
+                "Oracle": {
+                    "1": "I ask if a fellow slave looking very sickly approaches me for help; the answer is No.",
+                    "2": "I ask if I get put to work doing a simple and easy job; No, but...",
+                    "3": "Maybe I'm sold to a weak, elderly owner? Yes."
+                },
+                "3": "Portents can sometimes be quite specific in what they're referring to, but this is the exception rather than the norm. Most of the time the word combinations will be too random to directly apply, so instead you have to use them as a guide for your imagination.",
+                "4": "For instance, say I use a Portent to help me figure out what kind of monster I've encountered in a dungeon. I receive \"delved\" and \"plutonium\". The former immediately makes me think of a dwarf (or duergar), but plutonium is a little harder to directly fit into my D&D world. However, it does make me think of scientists and experimentation, which leads me to imagine a dwarven artificer.",
+                "5": "It helps to think of Portents as a game of charades, where the word you're trying to guess equates to how the Portent fits within the context of the scenario."
+            }
         },
         "NPCInteraction": {
             "Name": "NPC Interaction",
+            "Help": {
+                "1": "When crossing paths with an NPC, you generally have some idea of how they're gonna react. The prince will act lordly and noble, the beggar will ask you to donate to his charity, and the bandit will ask you to donate to his charity. But sometimes you turn up a loss at how an NPC is supposed to react.",
+                "2": "The first thing you want to do is determine their attitude towards you, which can be done with a simple d6 roll (using advantage and disadvantage as necessary):",
+                "StartingAttitude": {
+                    "1": "Hostile",
+                    "2": "Neutral",
+                    "3": "Friendly"
+                },
+                "3": "Assuming the NPC stops to talk, the topic of their conversation can be decided by a Portent. It's really that simple. No smoke and mirrors here."
+            },
             "1": "Hostile",
             "2": "Neutral",
             "3": "Friendly"
         },
         "TWENE": {
             "Name": "TWENE",
+            "Help": {
+                "1": "The sample scenario is an acceptable way of putting questions to the oracle, but it's also pretty slow. We're putting forward highly specific questions to the oracle; \"Do we start in a town?\" \"Am I captured by slavers?\" \"Does the town have a guard?\"",
+                "2": "This is all well and good when you're setting the scene for the adventure, when nothing is certain (unless you wish it). But say my character walks into a tavern. I don't want to spend several minutes determining how full the place is, what kind of drink they serve, and whether there's the typical shady old man handing out quests. So I ask the oracle a single question:",
+                "3": "\"Is everything as expected?\"",
+                "4": "This can be phrased a number of different ways. \"Does everything appear normal?\" and \"Is there anything of interest?\" are some variations I often use. This essentially skips all the nitty-gritty of having to figure out each detail, while still leaving room for the oracle to shine.",
+                "5": "These questions are best used sparingly at the start of different \"scenes\" and location changes, and should never be Likely or Unlikely in order to maximise the chance for the unexpected to occur.",
+                "6": "If the oracle answers no, and an alteration doesn't immediately springs to mind, you can use a Portent to get an idea of what's different compared to your expectations. However, they leave a lot up for interpretation and can often be too random to immediately make sense of.",
+                "7": "If the oracle answers no, and an alteration doesn't immediately springs to mind, you can use a Portent to get an idea of what's different compared to your expectations. However, they leave a lot up for interpretation and can often be too random to immediately make sense of.",
+                "8": "Explanations for what the hell the results mean are as follows:",
+                "Types": {
+                    "1": {
+                        "Name": "Major/Simple Elements",
+                        "1": "Most result on the table will mention a major or simple element. An element is anything in the scene; spacial dimensions, NPCs, lighting conditions, weather, smells, the whole shebang. A major element is something that is affecting the scene, and may even be in the Plot or Entity lists. A simple element is something of minimal importance (such as the paintings in a mansion’s parlour or the crowd at a festival). When choosing a simple element, pick something that on its own wouldn’t make a difference to how the scene plays out. If you’re having trouble figuring out what element to pick, a Portent can be a great pointer. Just remember to stay within the boundary of what constitutes a major or simple element."
+                    },
+                    "2": {
+                        "Name": "Increase/Decrease",
+                        "1": "Increasing means an existing element is somehow made bigger. More of this element, yes please. More monsters, more tunnels, more rain, more animosity from the local barkeep. This element increases in scale or importance, potentially turning it into something that could be added to the Plot or Entity lists. The opposite of this is Decrease, where an element is reduced; laxer security around the artefact, less handholds to climb the cliff with, no mozzies savaging you in the boggy swamp."
+                    },
+                    "3": {
+                        "Name": "Add/Remove Element",
+                        "1": "I mean, it’s kind of self explanatory. An element now exists in the scene that you weren’t previously aware of, be it an important one (like a hidden room or a backstabbing NPC) or a more fluff-ish element that adds to the flavour instead of directly influencing the adventure."
+                    },
+                    "4": {
+                        "Name": "Wild Positive/Negative",
+                        "1": "Like the Wild result on the Intervention Type table, this option allows you to go crazy with whatever idea first comes to mind. Because it can be a little obscure (and the whole point of this table is to narrow down obscure answers), the wild alteration can either be positive or negative for the party. This should help an idea spring to mind, but if nothing immediately grabs you and throws you off a cliff then a Portent can help point you in the right direction."
+                    }
+                }
+            },
             "1": "Increase simple element",
             "2": "Decrease simple elemnet",
             "3": "Add simple element",

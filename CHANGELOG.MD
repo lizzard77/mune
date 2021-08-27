@@ -7,6 +7,7 @@
 - Added the option for flavor text for portents
 - Added an option to change Intervention costs
 - Highlights the Intervention button when sufficient Intervention Points are accumulated
+- Add in-module information about MUNE
 
 ## 0.1.1
 

@@ -1,4 +1,5 @@
 import * as actions from "../actions.js";
+import { MuneWindow_Help } from "./help.js";
 
 export class MuneWindow extends Application {
     static get defaultOptions() {
@@ -7,12 +8,6 @@ export class MuneWindow extends Application {
             template: "modules/mune/templates/apps/mune.hbs",
             popOut: false,
         });
-    }
-
-    async _renderInner(...args) {
-        const result = super._renderInner(...args);
-
-        return result;
     }
 
     getData() {
@@ -80,6 +75,9 @@ export class MuneWindow extends Application {
         
         // Info editing
         html.find(".intervention-controls a").click(this._interventionControls.bind(this));
+
+        // Help
+        html.find('*[data-action="help"]').click(this._openHelp.bind(this));
     }
 
     _interventionControls(event) {
@@ -190,5 +188,21 @@ export class MuneWindow extends Application {
         else if (game.keyboard.isDown("Control")) options.disadvantage = true;
 
         return actions.twene(options);
+    }
+
+    async _openHelp() {
+        let window = game.mune.helpWindow;
+
+        if (window) {
+            await window.render(true);
+            if (window.element[0]) {
+                window.bringToTop();
+            }
+        }
+        else {
+            window = new MuneWindow_Help();
+            window.render(true);
+            game.mune.helpWindow = window;
+        }
     }
 }

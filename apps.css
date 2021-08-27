@@ -22,3 +22,32 @@
   background-color: #FF7436;
   border-color: #B75226;
 }
+#mune a[data-action] {
+  color: #ff6400;
+}
+#mune-help .mune-help {
+  height: 100%;
+}
+#mune-help .window-content {
+  overflow: hidden;
+}
+#mune-help .sheet-navigation {
+  height: 40px;
+  border-bottom: 1px solid darkred;
+}
+#mune-help section.content {
+  height: calc(100% - 40px);
+  overflow-y: auto;
+}
+#mune-help table th,
+#mune-help table td {
+  border-right: 1px solid black;
+  padding: 4px;
+}
+#mune-help table th {
+  border-bottom: 1px solid gray;
+}
+#mune-help table th:first-child,
+#mune-help table td:first-child {
+  border-left: 1px solid black;
+}

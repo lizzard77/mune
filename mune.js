@@ -5,6 +5,7 @@ import * as actions from "./module/actions.js";
 Hooks.once("init", () => {
     game.mune = {
         window: null,
+        helpWindow: null,
         actions: Object.entries(actions).reduce((cur, o) => {
             cur[o[0]] = o[1];
             return cur;
