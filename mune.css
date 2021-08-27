@@ -17,6 +17,11 @@
   display: flex;
   justify-content: space-between;
 }
+#mune .highlight {
+  color: white;
+  background-color: #FF7436;
+  border-color: #B75226;
+}
 .chat-message .mune .flavor {
   font-style: italic;
   color: #333;

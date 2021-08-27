@@ -67,11 +67,17 @@ const generateActionResult = async function(name, sides = 6, options = {}) {
         }
     }
 
-    let label = game.i18n.localize(`MUNE.${name}.${roll.total}`);
-    const keepLabel = options.advantage ? game.i18n.localize("MUNE.KeepHighest") : options.disadvantage ? game.i18n.localize("MUNE.KeepLowest") : undefined;
+    // For Intervention: subtract intervention points
+    if (name === "Intervention") {
+        const subtract = game.settings.get("mune", "interventionCost") ?? 3;
+        await addInterventionPoints(-subtract);
+    }
+
+    let label = game.i18n.localize(`mune.${name}.${roll.total}`);
+    const keepLabel = options.advantage ? game.i18n.localize("mune.KeepHighest") : options.disadvantage ? game.i18n.localize("mune.KeepLowest") : undefined;
 
     const content = await renderTemplate("modules/mune/templates/chat/action.hbs", {
-        title: game.i18n.localize(`MUNE.${name}.Name`),
+        title: game.i18n.localize(`mune.${name}.Name`),
         actionType: name.toLowerCase(),
         result: label,
         flavor: options.flavor,

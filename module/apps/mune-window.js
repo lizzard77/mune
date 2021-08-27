@@ -20,10 +20,13 @@ export class MuneWindow extends Application {
             info: {},
         });
 
+        const interventionPointCost = game.settings.get("mune", "interventionCost");
         const muneData = game.settings.get("mune", "data");
         data.info.interventionPoints = {
             total: muneData.interventionPoints ?? 0,
         };
+
+        data.doIntervention = muneData.interventionPoints >= interventionPointCost;
 
         return data;
     }
@@ -69,11 +72,11 @@ export class MuneWindow extends Application {
         }
 
         // Actions
-        html.find(".rolls button.oracle").click((event) => { this._rollDialog(event, { name: game.i18n.localize("MUNE.Oracle.Name"), fn: actions.oracle }); });
-        html.find(".rolls button.intervention").click((event) => { this._rollDialog(event, { name: game.i18n.localize("MUNE.Intervention.Name"), fn: actions.intervention }); });
+        html.find(".rolls button.oracle").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.Oracle.Name"), fn: actions.oracle }); });
+        html.find(".rolls button.intervention").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.Intervention.Name"), fn: actions.intervention }); });
         html.find(".rolls button.portent").click(this._rollPortent.bind(this));
-        html.find(".rolls button.npc-interaction").click((event) => { this._rollDialog(event, { name: game.i18n.localize("MUNE.NPCInteraction.Name"), fn: actions.npcInteraction }); });
-        html.find(".rolls button.twene").click((event) => { this._rollDialog(event, { name: game.i18n.localize("MUNE.TWENE.Name"), fn: actions.twene }); });
+        html.find(".rolls button.npc-interaction").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.NPCInteraction.Name"), fn: actions.npcInteraction }); });
+        html.find(".rolls button.twene").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.TWENE.Name"), fn: actions.twene }); });
         
         // Info editing
         html.find(".intervention-controls a").click(this._interventionControls.bind(this));
@@ -95,23 +98,23 @@ export class MuneWindow extends Application {
         event.preventDefault();
 
         new Dialog({
-            title: game.i18n.localize(`MUNE: ${options.name || "Unknown"}`),
-            content: `<input class="flavor" type="text" placeholder="${game.i18n.localize("MUNE.Reason")}" />`,
+            title: `MUNE: ${options.name || "Unknown"}`,
+            content: `<input class="flavor" type="text" placeholder="${game.i18n.localize("mune.Reason")}" />`,
             buttons: {
                 advantage: {
-                    label: game.i18n.localize("MUNE.KeepHighest"),
+                    label: game.i18n.localize("mune.KeepHighest"),
                     callback: (html) => {
                         options.fn({ advantage: true, flavor: html.find(".flavor").val() })
                     },
                 },
                 normal: {
-                    label: game.i18n.localize("MUNE.Roll"),
+                    label: game.i18n.localize("mune.Roll"),
                     callback: (html) => {
                         options.fn({ flavor: html.find(".flavor").val() })
                     },
                 },
                 disadvantage: {
-                    label: game.i18n.localize("MUNE.KeepLowest"),
+                    label: game.i18n.localize("mune.KeepLowest"),
                     callback: (html) => {
                         options.fn({ disadvantage: true, flavor: html.find(".flavor").val() })
                     },
@@ -124,22 +127,12 @@ export class MuneWindow extends Application {
         }).render(true);
     }
 
-    _rollIntervention(event) {
-        event.preventDefault();
-
-        const options = {};
-        if (game.keyboard.isDown("Shift")) options.advantage = true;
-        else if (game.keyboard.isDown("Control")) options.disadvantage = true;
-
-        return actions.intervention(options);
-    }
-
     _rollPortent(event) {
         event.preventDefault();
 
         new Dialog({
-            title: game.i18n.localize(`MUNE: ${game.i18n.localize("MUNE.Portent.Name")}`),
-            content: `<input class="flavor" type="text" placeholder="${game.i18n.localize("MUNE.Reason")}"/><p>${game.i18n.localize("MUNE.Dialog.HowManyWords.Info")}</p>`,
+            title: game.i18n.localize(`mune: ${game.i18n.localize("mune.Portent.Name")}`),
+            content: `<input class="flavor" type="text" placeholder="${game.i18n.localize("mune.Reason")}"/><p>${game.i18n.localize("mune.Dialog.HowManyWords.Info")}</p>`,
             buttons: {
                 "1": {
                     label: "1",

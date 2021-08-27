@@ -1,9 +1,16 @@
 {
-    "MUNE": {
+    "MUNE": "MUNE",
+    "mune": {
         "KeepHighest": "Keep Highest",
         "KeepLowest": "Keep Lowest",
         "Reason": "Reason",
         "Roll": "Roll",
+        "Settings": {
+            "InterventionCost": {
+                "Name": "Intervention Cost",
+                "Hint": "How many points an intervention subtracts."
+            }
+        },
         "Oracle": {
             "Name": "Oracle",
             "1": "No, and...",

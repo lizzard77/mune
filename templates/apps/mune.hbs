@@ -1,17 +1,17 @@
 <div id="mune" class="app">
     <div class="rolls">
-        <button class="oracle">{{localize "MUNE.Oracle.Name"}}</button>
-        <button class="intervention">{{localize "MUNE.Intervention.Name"}}</button>
-        <button class="portent">{{localize "MUNE.Portent.Name"}}</button>
-        <button class="npc-interaction">{{localize "MUNE.NPCInteraction.Name"}}</button>
-        <button class="twene">{{localize "MUNE.TWENE.Name"}}</button>
+        <button class="oracle">{{localize "mune.Oracle.Name"}}</button>
+        <button class="intervention{{#if doIntervention}} highlight{{/if}}">{{localize "mune.Intervention.Name"}}</button>
+        <button class="portent">{{localize "mune.Portent.Name"}}</button>
+        <button class="npc-interaction">{{localize "mune.NPCInteraction.Name"}}</button>
+        <button class="twene">{{localize "mune.TWENE.Name"}}</button>
     </div>
 
     <hr>
 
     <div class="info">
         <div class="intervention">
-            <span>{{localize "MUNE.InterventionPoints.Name.Plural"}}: {{info.interventionPoints.total}}</span>
+            <span>{{localize "mune.InterventionPoints.Name.Plural"}}: {{info.interventionPoints.total}}</span>
             <div class="intervention-controls">
                 <a class="subtract"><i class="fas fa-minus"></i></a>
                 <a class="add"><i class="fas fa-plus"></i></a>

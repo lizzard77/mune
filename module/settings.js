@@ -1,4 +1,17 @@
 export const registerSettings = function() {
+    // Intervention point cost
+    game.settings.register("mune", "interventionCost", {
+        name: "mune.Settings.InterventionCost.Name",
+        hint: "mune.Settings.InterventionCost.Hint",
+        scope: "world",
+        config: true,
+        type: Number,
+        default: 3,
+        onChange: () => {
+            game.mune?.window?.render();
+        },
+    });
+
     // Window position
     game.settings.register("mune", "windowPosition", {
         name: "windowPosition",
