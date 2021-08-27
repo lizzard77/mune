@@ -1,5 +1,7 @@
 <div class="mune mune-portent">
     <h2>{{localize "MUNE.Portent.Name"}}</h2>
+    
+    {{#if flavor}}<p><span class="flavor">{{flavor}}</span></p>{{/if}}
 
     <p class="content">
         {{#each words as |word|}}

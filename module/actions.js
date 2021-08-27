@@ -38,6 +38,7 @@ export const portent = async function(options = {}) {
     // Generate chat content
     const content = await renderTemplate("modules/mune/templates/chat/portent.hbs", {
         words: words,
+        flavor: options.flavor,
     });
 
     return ChatMessage.create({

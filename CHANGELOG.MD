@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+### Features
+
+- Added the option for flavor text for portents
+
 ## 0.1.1
 
 ### Features
