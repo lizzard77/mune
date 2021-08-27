@@ -3,9 +3,9 @@
     "title": "MUNE",
     "description": "A toolkit for playing solo.",
     "url": "",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "minimumCoreVersion": "0.8.5",
-    "compatibleCoreVersion": "0.8.6",
+    "compatibleCoreVersion": "0.8.8",
     "author": "Furyspark",
     "esmodules": [
         "mune.js"
@@ -30,5 +30,5 @@
         }
     ],
     "manifest": "https://gitlab.com/Furyspark/foundryvtt-mune/-/raw/master/module.json",
-    "download": "https://gitlab.com/Furyspark/foundryvtt-mune/-/archive/0.1.1/foundryvtt-mune-0.1.1.zip"
+    "download": "https://gitlab.com/Furyspark/foundryvtt-mune/-/archive/0.1.1/foundryvtt-mune-0.1.2.zip"
 }
