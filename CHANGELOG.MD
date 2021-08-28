@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3
+
+### Bug Fixes
+
+- Portents weren't working
+
 ## 0.1.2
 
 ### Features
