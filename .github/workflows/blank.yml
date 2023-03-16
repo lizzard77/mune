@@ -17,7 +17,7 @@ jobs:
         uses: battila7/get-version-action@v2
 
       - name: Create zip archive
-        run: zip -r ./module.zip module.json *.png *.jpg *.webp *.pdf packs/
+        run: zip -r ./module.zip module.json *.js *.css *.png *.jpg *.webp *.pdf packs/ templates/ module/ lang/ doc/
 
       - name: Update release with files
         id: create_version_release
@@ -28,7 +28,7 @@ jobs:
           draft: ${{ github.event.release.unpublished }}
           prerelease: ${{ github.event.release.prerelease }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "./module.json, ./harvest-carnival.zip"
+          artifacts: "./module.json, ./module.zip"
           tag: ${{ github.event.release.tag_name }}
           body: ${{ github.event.release.body }}
         
