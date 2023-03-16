@@ -1,3 +1,5 @@
+(This repo is a fork of https://gitlab.com/Furyspark/foundryvtt-mune by Tijmen Bok to continue the project)
+
 # What is this?
 
 This is a module that implements the [MUNE](https://homebrewery.naturalcrit.com/share/rkmo0t9k4Q) solo toolkit in FoundryVTT. In short, it adds a window with buttons for quickly rolling various aspects of MUNE.
