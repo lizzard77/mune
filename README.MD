@@ -10,7 +10,7 @@ Additionally, [here is a link](https://empaitirkosu.wordpress.com/2018/07/24/i-m
 
 ## Using the manifest URL from within Foundry's module browser
 
-- Copy the following URL to Foundry's module browser's installation URL field: [https://gitlab.com/Furyspark/foundryvtt-mune/-/raw/master/module.json](https://gitlab.com/Furyspark/foundryvtt-mune/-/raw/master/module.json)
+- Copy the following URL to Foundry's module browser's installation URL field: [https://github.com/lizzard77/mune/releases/latest/download/module.json](https://github.com/lizzard77/mune/releases/latest/download/module.json)
 
 # Screenshots
 
