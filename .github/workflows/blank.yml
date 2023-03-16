@@ -1,7 +1,20 @@
 name: Publish release
 
+env:
+  # The URL used for the module's "Project URL" link on FoundryVTT's website.
+  project_url: "https://github.com/${{github.repository}}"
+
+  # A URL that will always point to the latest manifest.
+  # FoundryVTT uses this URL to check whether the current module version that
+  # is installed is the latest version. This URL should NOT change,
+  # otherwise FoundryVTT won't be able to perform this check.
+  latest_manifest_url: "https://github.com/${{github.repository}}/releases/latest/download/module.json"
+
+  # The URL to the module archive associated with the module release being
+  # processed by this workflow.
+  release_module_url: "https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/module.zip"
+
 on: 
-  workflow_dispatch:
   release:
     types: [published]
 
@@ -12,9 +25,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Extract tag version number
+      # Extract version embedded in the tag.
+      # This step expects the tag to be one of the following formats:
+      #   - "v<major>.<minor>.<patch>" (e.g., "v1.2.3")
+      #   - "<major>.<minor>.<patch>"  (e.g., "1.2.3")
+      #
+      # The version will be used by later steps to fill in the value for the
+      # "version" key required for a valid module manifest.
+      - name: Extract Version From Tag
         id: get_version
         uses: battila7/get-version-action@v2
+
+      - name: Modify Module Manifest With Release-Specific Values
+        id: sub_manifest_link_version
+        uses: cschleiden/replace-tokens@v1
+        with:
+          files: 'module.json'
+        env:
+          VERSION: ${{steps.get_version.outputs.version-without-v}}
+          URL: ${{ env.project_url }}
+          MANIFEST: ${{ env.latest_manifest_url }}
+          DOWNLOAD: ${{ env.release_module_url }}
 
       - name: Create zip archive
         run: zip -r ./module.zip module.json *.js *.css *.png *.jpg *.webp *.pdf packs/ templates/ module/ lang/ doc/
