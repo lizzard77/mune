@@ -12,6 +12,18 @@ export const registerSettings = function() {
         },
     });
 
+    // Window permission
+    game.settings.register("mune", "windowPermission", {
+        name: "mune.Settings.Permission.Name",
+        hint: "mune.Settings.Permission.Hint",
+        scope: "world",
+        config: true,
+        type: Number,
+        default: 4,
+		choices: {1: "Player", 2: "Trusted", 3: "Assistant", 4: "Game Master"},
+		requiresReload: true
+    });
+
     // Window position
     game.settings.register("mune", "windowPosition", {
         name: "windowPosition",

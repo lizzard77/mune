@@ -16,6 +16,9 @@ Hooks.once("init", () => {
 });
 
 Hooks.once("ready", () => {
+    if (game.user.role < game.settings.get("mune", "windowPermission")) 
+        return;
+
     const win = new MuneWindow();
     game.mune.window = win;
     const pos = game.settings.get("mune", "windowPosition");

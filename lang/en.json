@@ -14,7 +14,12 @@
             "InterventionCost": {
                 "Name": "Intervention Cost",
                 "Hint": "How many points an intervention subtracts."
+            },
+            "Permission": {
+                "Name": "Permission",
+                "Hint": "Permission required to see MUNE's window."
             }
+
         },
         "Oracle": {
             "Name": "Oracle",
