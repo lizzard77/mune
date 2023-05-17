@@ -24,6 +24,18 @@ export const registerSettings = function() {
 		requiresReload: true
     });
 
+    // Window permission
+    game.settings.register("mune", "windowStyle", {
+        name: "mune.Settings.Style.Name",
+        hint: "mune.Settings.Style.Hint",
+        scope: "world",
+        config: true,
+        type: Number,
+        default: 1,
+		choices: {1: "Floating Window", 2: "Regular Window", 3: "In Chat sidebar"},
+		requiresReload: true
+    });
+
     // Window position
     game.settings.register("mune", "windowPosition", {
         name: "windowPosition",
@@ -48,9 +60,11 @@ export const registerSettings = function() {
             interventionPoints: 0,
         },
         onChange: () => {
-            if (game.mune?.window) {
+            if (game.mune?.window) 
                 game.mune.window.render();
-            }
+            
+            if (game.mune?.window?.renderSidebar) 
+                game.mune.window.renderSidebar();
         },
     });
 };

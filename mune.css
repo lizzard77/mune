@@ -1,5 +1,5 @@
 #mune {
-  position: fixed;
+    position: fixed;
 }
 #mune .rolls {
   display: flex;
@@ -7,9 +7,25 @@
   flex-direction: row;
   width: 400px;
 }
+
+#mune.sidebar .rolls {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+}
+  
 #mune .rolls button {
   width: 128px;
+  margin: 2px;
 }
+
+#mune.sidebar .rolls button {
+    
+}
+
+
 #mune hr {
   border-color: rgba(255, 255, 255, 0.5);
 }

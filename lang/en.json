@@ -18,6 +18,10 @@
             "Permission": {
                 "Name": "Permission",
                 "Hint": "Permission required to see MUNE's window."
+            },
+            "Style": {
+                "Name": "Window Style",
+                "Hint": "How to display MUNE's window."
             }
 
         },

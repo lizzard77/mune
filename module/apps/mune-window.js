@@ -3,10 +3,11 @@ import { MuneWindow_Help } from "./help.js";
 
 export class MuneWindow extends Application {
     static get defaultOptions() {
+        const isPopout = game.settings.get("mune", "windowStyle") === 2;
         return mergeObject(super.defaultOptions, {
             id: "mune",
             template: "modules/mune/templates/apps/mune.hbs",
-            popOut: false,
+            popOut: isPopout
         });
     }
 
@@ -53,18 +54,39 @@ export class MuneWindow extends Application {
     }
 
     activateListeners(html) {
-        // Make window draggable despite not being a popout
-        const drag = new Draggable(this, html);
+        const isPopout = game.settings.get("mune", "windowStyle") === 2;
+        const isSidebar = game.settings.get("mune", "windowStyle") === 3;
+
+        if (!isPopout && !isSidebar)
         {
-            const fn = drag._onDragMouseUp;
-            drag._onDragMouseUp = function(event) {
-                fn.call(this, event);
-                game.settings.set("mune", "windowPosition", {
-                    left: this.app.position.left,
-                    top: this.app.position.top,
-                });
+            // Make window draggable despite not being a popout
+            const drag = new Draggable(this, html);
+            {
+                const fn = drag._onDragMouseUp;
+                drag._onDragMouseUp = function(event) {
+                    fn.call(this, event);
+                    game.settings.set("mune", "windowPosition", {
+                        left: this.app.position.left,
+                        top: this.app.position.top,
+                    });
+                }
             }
         }
+
+        html.css("position", isPopout || isSidebar ? "inherit" : "fixed");
+        if (isPopout || isSidebar)
+            html.removeClass("app");
+        if (isPopout)
+            html.addClass("popout");
+        if (isSidebar)
+        {
+            html.addClass("sidebar");
+            //html.addClass("flexrow");
+            html.css("flex", "0");
+            html.css("margin-top", "1em");
+            html.css("margin-bottom", "1em");
+        }
+
 
         // Actions
         html.find(".rolls button.oracle").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.Oracle.Name"), fn: actions.oracle }); });
@@ -206,3 +228,4 @@ export class MuneWindow extends Application {
         }
     }
 }
+
