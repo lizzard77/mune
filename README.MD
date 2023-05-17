@@ -18,7 +18,8 @@ Additionally, [here is a link](https://empaitirkosu.wordpress.com/2018/07/24/i-m
 
 Toolkit
 
-![Toolkit](./doc/img/toolkit.jpg)
+![Toolkit](./doc/img/tk-floating.png)
+![Toolkit](./doc/img/tk-sidebar.png)
 
 Oracle Dialog
 
