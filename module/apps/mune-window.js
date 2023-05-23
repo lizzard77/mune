@@ -6,6 +6,7 @@ export class MuneWindow extends Application {
         const isPopout = game.settings.get("mune", "windowStyle") === 2;
         return mergeObject(super.defaultOptions, {
             id: "mune",
+            title : "MUNE",
             template: "modules/mune/templates/apps/mune.hbs",
             popOut: isPopout
         });
@@ -28,11 +29,14 @@ export class MuneWindow extends Application {
     }
 
     setPosition({left, top, width, height, scale} = {}) {
+        super.setPosition({left, top, width, height, scale});
         const el = this.element[0];
         const currentPosition = this.position;
 
         width = el.offsetWidth;
         height = el.offsetHeight;
+
+        if (!width || !height) return;
 
         // Update left
         {
@@ -74,8 +78,8 @@ export class MuneWindow extends Application {
         }
 
         html.css("position", isPopout || isSidebar ? "inherit" : "fixed");
-        if (isPopout || isSidebar)
-            html.removeClass("app");
+        //if (isPopout || isSidebar)
+        //    html.removeClass("app");
         if (isPopout)
             html.addClass("popout");
         if (isSidebar)
@@ -86,8 +90,6 @@ export class MuneWindow extends Application {
             html.css("margin-top", "1em");
             html.css("margin-bottom", "1em");
         }
-
-
         // Actions
         html.find(".rolls button.oracle").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.Oracle.Name"), fn: actions.oracle }); });
         html.find(".rolls button.intervention").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.Intervention.Name"), fn: actions.intervention }); });
