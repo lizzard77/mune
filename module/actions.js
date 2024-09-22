@@ -32,7 +32,7 @@ export const portent = async function(options = {}) {
     for (let a = 0; a < options.wordCount; a++) {
         const table = tables[Math.floor(Math.random() * tables.length)];
         const result = (await table.draw({ displayChat: false })).results[0];
-        words.push(result.data.text);
+        words.push(result.text);
     }
 
     // Generate chat content

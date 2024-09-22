@@ -1,8 +1,15 @@
-2023/07/11-11:31:48.110 2870 Recovering log #11
-2023/07/11-11:31:48.119 2870 Delete type=0 #11
-2023/07/11-11:31:48.119 2870 Delete type=3 #10
-2023/07/11-11:32:25.225 45d8 Level-0 table #15: started
-2023/07/11-11:32:25.225 45d8 Level-0 table #15: 0 bytes OK
-2023/07/11-11:32:25.227 45d8 Delete type=0 #13
-2023/07/11-11:32:25.232 45d8 Manual compaction at level-0 from '!tables!2K7DRGdXfaQnQ1Gg' @ 72057594037927935 : 1 .. '!tables.results!pxILHKaSmvHCrsQL.zyvcp2b8rrgcoy3x' @ 0 : 0; will stop at (end)
-2023/07/11-11:32:25.232 45d8 Manual compaction at level-1 from '!tables!2K7DRGdXfaQnQ1Gg' @ 72057594037927935 : 1 .. '!tables.results!pxILHKaSmvHCrsQL.zyvcp2b8rrgcoy3x' @ 0 : 0; will stop at (end)
+2024/09/22-15:21:56.346431 7b78b40006c0 Recovering log #34
+2024/09/22-15:21:56.352934 7b78b40006c0 Delete type=0 #34
+2024/09/22-15:21:56.352975 7b78b40006c0 Delete type=3 #33
+2024/09/22-15:27:01.011914 7b78b30006c0 Level-0 table #38: started
+2024/09/22-15:27:01.016861 7b78b30006c0 Level-0 table #38: 247742 bytes OK
+2024/09/22-15:27:01.019626 7b78b30006c0 Delete type=0 #36
+2024/09/22-15:27:01.034857 7b78b30006c0 Manual compaction at level-0 from '!tables!2K7DRGdXfaQnQ1Gg' @ 72057594037927935 : 1 .. '!tables.results!pxILHKaSmvHCrsQL.zyvcp2b8rrgcoy3x' @ 0 : 0; will stop at (end)
+2024/09/22-15:27:01.039526 7b78b30006c0 Manual compaction at level-1 from '!tables!2K7DRGdXfaQnQ1Gg' @ 72057594037927935 : 1 .. '!tables.results!pxILHKaSmvHCrsQL.zyvcp2b8rrgcoy3x' @ 0 : 0; will stop at '!tables.results!pxILHKaSmvHCrsQL.zyvcp2b8rrgcoy3x' @ 8736 : 1
+2024/09/22-15:27:01.039531 7b78b30006c0 Compacting 1@1 + 1@2 files
+2024/09/22-15:27:01.043853 7b78b30006c0 Generated table #39@1: 3090 keys, 247742 bytes
+2024/09/22-15:27:01.043871 7b78b30006c0 Compacted 1@1 + 1@2 files => 247742 bytes
+2024/09/22-15:27:01.046704 7b78b30006c0 compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/09/22-15:27:01.046807 7b78b30006c0 Delete type=2 #38
+2024/09/22-15:27:01.047094 7b78b30006c0 Delete type=2 #28
+2024/09/22-15:27:01.057594 7b78b30006c0 Manual compaction at level-1 from '!tables.results!pxILHKaSmvHCrsQL.zyvcp2b8rrgcoy3x' @ 8736 : 1 .. '!tables.results!pxILHKaSmvHCrsQL.zyvcp2b8rrgcoy3x' @ 0 : 0; will stop at (end)
