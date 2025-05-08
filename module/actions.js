@@ -51,7 +51,7 @@ const generateActionResult = async function(name, sides = 6, options = {}) {
     let formula = `1d${sides}`;
     if (options.advantage) formula = `2d${sides}kh`;
     else if (options.disadvantage) formula = `2d${sides}kl`;
-    const roll = await new CONFIG.Dice.rolls[0](formula).evaluate({ async: true });
+    const roll = await new CONFIG.Dice.rolls[0](formula).evaluate();
 
     // For Oracle: add intervention points
     if (name === "Oracle") {
@@ -102,7 +102,7 @@ export const addInterventionPoints = async function(value = 1) {
 };
 
 export const setInterventionPoints = async function(value = 0) {
-    return game.settings.set("mune", "data", mergeObject(game.settings.get("mune", "data"), {
+    return game.settings.set("mune", "data", foundry.utils.mergeObject(game.settings.get("mune", "data"), {
         interventionPoints: Math.max(0, value),
     }, { inplace: false }));
 };
