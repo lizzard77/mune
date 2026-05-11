@@ -1,3 +1,17 @@
+/* Discreet floating window: collapse and fade the title bar when not hovered,
+   but keep the window background so the buttons sit on a solid surface. */
+#mune .window-header {
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease;
+  max-height: 4rem;
+}
+#mune:not(:hover):not(.minimized) .window-header {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 #mune .window-content {
   padding: 10px;
 }
