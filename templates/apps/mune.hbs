@@ -1,27 +1,25 @@
-<div id="mune" class="app">
-    <div class="rolls">
-        <button class="oracle">{{localize "mune.Oracle.Name"}}</button>
-        <button class="intervention{{#if doIntervention}} highlight{{/if}}">{{localize "mune.Intervention.Name"}}</button>
-        <button class="portent">{{localize "mune.Portent.Name"}}</button>
-        <button class="npc-interaction">{{localize "mune.NPCInteraction.Name"}}</button>
-        <button class="twene">{{localize "mune.TWENE.Name"}}</button>
-    </div>
+<div class="rolls">
+    <button type="button" data-action="oracle">{{localize "mune.Oracle.Name"}}</button>
+    <button type="button" data-action="intervention" class="{{#if doIntervention}}highlight{{/if}}">{{localize "mune.Intervention.Name"}}</button>
+    <button type="button" data-action="portent">{{localize "mune.Portent.Name"}}</button>
+    <button type="button" data-action="npcInteraction">{{localize "mune.NPCInteraction.Name"}}</button>
+    <button type="button" data-action="twene">{{localize "mune.TWENE.Name"}}</button>
+</div>
 
-    <hr>
+<hr>
 
-    <div class="info">
-        <div class="intervention">
-            <span>{{localize "mune.InterventionPoints.Name.Plural"}}: {{info.interventionPoints.total}}</span>
-            <div class="intervention-controls">
-                <a class="subtract"><i class="fas fa-minus"></i></a>
-                <a class="add"><i class="fas fa-plus"></i></a>
-            </div>
+<div class="info">
+    <div class="intervention">
+        <span>{{localize "mune.InterventionPoints.Name.Plural"}}: {{interventionPoints}}</span>
+        <div class="intervention-controls">
+            <a data-action="interventionSubtract"><i class="fas fa-minus"></i></a>
+            <a data-action="interventionAdd"><i class="fas fa-plus"></i></a>
         </div>
     </div>
+</div>
 
-    <hr>
+<hr>
 
-    <div class="help">
-        <a data-action="help">{{localize "mune.Info"}}</a>
-    </div>
+<div class="help">
+    <a data-action="help">{{localize "mune.Info"}}</a>
 </div>

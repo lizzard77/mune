@@ -8,9 +8,9 @@
     "manifest": "#{MANIFEST}#",
     "download": "#{DOWNLOAD}#",
     "compatibility": {
-        "minimum": "0.8.5",
-        "verified": "13.341",
-        "maximum": 13
+        "minimum": "13",
+        "verified": "14",
+        "maximum": "14"
       },
       "authors": [{
         "name": "Phil R"
@@ -35,7 +35,7 @@
             "name": "mune",
             "label": "MUNE",
             "systems": ["mune"],
-            "path": "./packs/mune.db",
+            "path": "./packs/mune",
             "type": "RollTable"
         }
     ]

@@ -1,2 +1,13 @@
 node_modules
 .vscode
+*.md
+
+# Compiled compendium packs (LevelDB) — regenerate via `fvtt package pack`
+packs/*/*.ldb
+packs/*/*.log
+packs/*/MANIFEST-*
+packs/*/CURRENT
+packs/*/LOCK
+packs/*/LOG
+packs/*/LOG.old
+packs/*/lost/

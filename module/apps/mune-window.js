@@ -1,233 +1,133 @@
 import * as actions from "../actions.js";
 import { MuneWindow_Help } from "./help.js";
 
-export class MuneWindow extends Application {
-    static get defaultOptions() {
-        const isPopout = game.settings.get("mune", "windowStyle") === 2;
-        return mergeObject(super.defaultOptions, {
-            id: "mune",
-            title : "MUNE",
-            template: "modules/mune/templates/apps/mune.hbs",
-            popOut: isPopout
-        });
-    }
+const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 
-    getData() {
-        const data = mergeObject(super.getData(), {
-            info: {},
-        });
+export class MuneWindow extends HandlebarsApplicationMixin(ApplicationV2) {
+    static DEFAULT_OPTIONS = {
+        id: "mune",
+        classes: ["mune"],
+        window: {
+            title: "MUNE",
+            resizable: false,
+        },
+        position: {
+            width: "auto",
+            height: "auto",
+        },
+        actions: {
+            oracle: MuneWindow.#onOracle,
+            intervention: MuneWindow.#onIntervention,
+            portent: MuneWindow.#onPortent,
+            npcInteraction: MuneWindow.#onNpcInteraction,
+            twene: MuneWindow.#onTwene,
+            interventionAdd: MuneWindow.#onInterventionAdd,
+            interventionSubtract: MuneWindow.#onInterventionSubtract,
+            help: MuneWindow.#onHelp,
+        },
+    };
 
-        const interventionPointCost = game.settings.get("mune", "interventionCost");
+    static PARTS = {
+        main: { root: true, template: "modules/mune/templates/apps/mune.hbs" },
+    };
+
+    #savePosition = foundry.utils.debounce(() => {
+        const { top, left } = this.position;
+        if (!Number.isFinite(top) || !Number.isFinite(left)) return;
+        game.settings.set("mune", "windowPosition", { top, left });
+    }, 500);
+
+    async _prepareContext(options) {
         const muneData = game.settings.get("mune", "data");
-        data.info.interventionPoints = {
-            total: muneData.interventionPoints ?? 0,
+        const interventionCost = game.settings.get("mune", "interventionCost");
+        const interventionPoints = muneData.interventionPoints ?? 0;
+        return {
+            interventionPoints,
+            doIntervention: interventionPoints >= interventionCost,
         };
-
-        data.doIntervention = muneData.interventionPoints >= interventionPointCost;
-
-        return data;
     }
 
-    setPosition({left, top, width, height, scale} = {}) {
-        super.setPosition({left, top, width, height, scale});
-        const el = this.element[0];
-        const currentPosition = this.position;
-
-        width = el.offsetWidth;
-        height = el.offsetHeight;
-
-        if (!width || !height) return;
-
-        // Update left
-        {
-            const tarL = Number.isFinite(left) ? left : (window.innerWidth - width) / 2;
-            const maxL = Math.max(window.innerWidth - width, 0);
-            currentPosition.left = left = Math.clamped(tarL, 0, maxL);
-            el.style.left = left+"px";
-        }
-
-        // Update top
-        {
-            const tarT = Number.isFinite(top) ? top : (window.innerHeight - height) / 2;
-            const maxT = Math.max(window.innerHeight - height, 0);
-            currentPosition.top = top = Math.clamped(tarT, 0, maxT);
-            el.style.top = currentPosition.top+"px";
-        }
-
-        return currentPosition;
+    _onPosition(position) {
+        this.#savePosition();
     }
 
-    activateListeners(html) {
-        const isPopout = game.settings.get("mune", "windowStyle") === 2;
-        const isSidebar = game.settings.get("mune", "windowStyle") === 3;
-
-        if (!isPopout && !isSidebar)
-        {
-            // Make window draggable despite not being a popout
-            const drag = new Draggable(this, html);
-            {
-                const fn = drag._onDragMouseUp;
-                drag._onDragMouseUp = function(event) {
-                    fn.call(this, event);
-                    game.settings.set("mune", "windowPosition", {
-                        left: this.app.position.left,
-                        top: this.app.position.top,
-                    });
-                }
-            }
-        }
-
-        html.css("position", isPopout || isSidebar ? "inherit" : "fixed");
-        //if (isPopout || isSidebar)
-        //    html.removeClass("app");
-        if (isPopout)
-            html.addClass("popout");
-        if (isSidebar)
-        {
-            html.addClass("sidebar");
-            //html.addClass("flexrow");
-            html.css("flex", "0");
-            html.css("margin-top", "1em");
-            html.css("margin-bottom", "1em");
-        }
-        // Actions
-        html.find(".rolls button.oracle").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.Oracle.Name"), fn: actions.oracle }); });
-        html.find(".rolls button.intervention").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.Intervention.Name"), fn: actions.intervention }); });
-        html.find(".rolls button.portent").click(this._rollPortent.bind(this));
-        html.find(".rolls button.npc-interaction").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.NPCInteraction.Name"), fn: actions.npcInteraction }); });
-        html.find(".rolls button.twene").click((event) => { this._rollDialog(event, { name: game.i18n.localize("mune.TWENE.Name"), fn: actions.twene }); });
-        
-        // Info editing
-        html.find(".intervention-controls a").click(this._interventionControls.bind(this));
-
-        // Help
-        html.find('*[data-action="help"]').click(this._openHelp.bind(this));
+    static #onOracle(event, target) {
+        return this.#actionDialog({ name: game.i18n.localize("mune.Oracle.Name"), fn: actions.oracle });
     }
 
-    _interventionControls(event) {
-        event.preventDefault();
-        const a = event.currentTarget;
-
-        if (a.classList.contains("add")) {
-            return actions.addInterventionPoints(1);
-        }
-        else if (a.classList.contains("subtract")) {
-            return actions.addInterventionPoints(-1);
-        }
+    static #onIntervention(event, target) {
+        return this.#actionDialog({ name: game.i18n.localize("mune.Intervention.Name"), fn: actions.intervention });
     }
 
-    _rollDialog(event, options) {
-        event.preventDefault();
+    static #onNpcInteraction(event, target) {
+        return this.#actionDialog({ name: game.i18n.localize("mune.NPCInteraction.Name"), fn: actions.npcInteraction });
+    }
 
-        new Dialog({
-            title: `MUNE: ${options.name || "Unknown"}`,
-            content: `<input class="flavor" type="text" placeholder="${game.i18n.localize("mune.Reason")}" />`,
-            buttons: {
-                advantage: {
+    static #onTwene(event, target) {
+        return this.#actionDialog({ name: game.i18n.localize("mune.TWENE.Name"), fn: actions.twene });
+    }
+
+    static #onInterventionAdd(event, target) {
+        return actions.addInterventionPoints(1);
+    }
+
+    static #onInterventionSubtract(event, target) {
+        return actions.addInterventionPoints(-1);
+    }
+
+    static async #onHelp(event, target) {
+        let win = game.mune.helpWindow;
+        if (win?.rendered) {
+            win.bringToFront();
+            return;
+        }
+        win = new MuneWindow_Help();
+        game.mune.helpWindow = win;
+        await win.render({ force: true });
+    }
+
+    async #actionDialog({ name, fn }) {
+        const reason = game.i18n.localize("mune.Reason");
+        const result = await DialogV2.wait({
+            window: { title: `MUNE: ${name}` },
+            content: `<input type="text" name="flavor" placeholder="${reason}" autofocus />`,
+            buttons: [
+                {
+                    action: "advantage",
                     label: game.i18n.localize("mune.KeepHighest"),
-                    callback: (html) => {
-                        options.fn({ advantage: true, flavor: html.find(".flavor").val() })
-                    },
+                    callback: (event, button) => ({ advantage: true, flavor: button.form.elements.flavor.value }),
                 },
-                normal: {
+                {
+                    action: "normal",
                     label: game.i18n.localize("mune.Roll"),
-                    callback: (html) => {
-                        options.fn({ flavor: html.find(".flavor").val() })
-                    },
+                    default: true,
+                    callback: (event, button) => ({ flavor: button.form.elements.flavor.value }),
                 },
-                disadvantage: {
+                {
+                    action: "disadvantage",
                     label: game.i18n.localize("mune.KeepLowest"),
-                    callback: (html) => {
-                        options.fn({ disadvantage: true, flavor: html.find(".flavor").val() })
-                    },
+                    callback: (event, button) => ({ disadvantage: true, flavor: button.form.elements.flavor.value }),
                 },
-            },
-            default: "normal",
-            render: (html) => {
-                html.find("input.flavor").focus();
-            },
-        }).render(true);
+            ],
+            rejectClose: false,
+        });
+        if (result) await fn(result);
     }
 
-    _rollPortent(event) {
-        event.preventDefault();
-
-        new Dialog({
-            title: game.i18n.localize(`mune: ${game.i18n.localize("mune.Portent.Name")}`),
-            content: `<input class="flavor" type="text" placeholder="${game.i18n.localize("mune.Reason")}"/><p>${game.i18n.localize("mune.Dialog.HowManyWords.Info")}</p>`,
-            buttons: {
-                "1": {
-                    label: "1",
-                    callback: (html) => {
-                        actions.portent({ flavor: html.find(".flavor").val(), wordCount: 1 });
-                    },
-                },
-                "2": {
-                    label: "2",
-                    callback: (html) => {
-                        actions.portent({ flavor: html.find(".flavor").val(), wordCount: 2 });
-                    },
-                },
-                "3": {
-                    label: "3",
-                    callback: (html) => {
-                        actions.portent({ flavor: html.find(".flavor").val(), wordCount: 3 });
-                    },
-                },
-                "4": {
-                    label: "4",
-                    callback: (html) => {
-                        actions.portent({ flavor: html.find(".flavor").val(), wordCount: 4 });
-                    },
-                },
-                "5": {
-                    label: "5",
-                    callback: (html) => {
-                        actions.portent({ flavor: html.find(".flavor").val(), wordCount: 5 });
-                    },
-                }
-            },
-            default: "2",
-            render: (html) => {
-                html.find("input.flavor").focus();
-            },
-        }).render(true);
-    }
-
-    _rollNPCInteraction(event) {
-        event.preventDefault();
-
-        const options = {};
-        if (game.keyboard.isDown("Shift")) options.advantage = true;
-        else if (game.keyboard.isDown("Control")) options.disadvantage = true;
-
-        return actions.npcInteraction(options);
-    }
-
-    _rollTWENE(event) {
-        event.preventDefault();
-
-        const options = {};
-        if (game.keyboard.isDown("Shift")) options.advantage = true;
-        else if (game.keyboard.isDown("Control")) options.disadvantage = true;
-
-        return actions.twene(options);
-    }
-
-    async _openHelp() {
-        let window = game.mune.helpWindow;
-
-        if (window) {
-            await window.render(true);
-            if (window.element[0]) {
-                window.bringToTop();
-            }
-        }
-        else {
-            window = new MuneWindow_Help();
-            window.render(true);
-            game.mune.helpWindow = window;
-        }
+    static async #onPortent(event, target) {
+        const reason = game.i18n.localize("mune.Reason");
+        const info = game.i18n.localize("mune.Dialog.HowManyWords.Info");
+        const result = await DialogV2.wait({
+            window: { title: `MUNE: ${game.i18n.localize("mune.Portent.Name")}` },
+            content: `<input type="text" name="flavor" placeholder="${reason}" autofocus /><p>${info}</p>`,
+            buttons: [1, 2, 3, 4, 5].map(n => ({
+                action: String(n),
+                label: String(n),
+                default: n === 2,
+                callback: (event, button) => ({ wordCount: n, flavor: button.form.elements.flavor.value }),
+            })),
+            rejectClose: false,
+        });
+        if (result) await actions.portent(result);
     }
 }
-
